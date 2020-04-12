@@ -198,6 +198,9 @@ class _ModelRegistryHelper(object):
       LookupError: If no class with the given key has been registered.
     """
     all_params = cls.GetAllRegisteredClasses()
+    # Removes 'params.' if exists.
+    if 'params.' in class_key:
+      class_key = class_key.replace('params.', '')
     if class_key not in all_params:
       for k in sorted(all_params):
         tf.logging.info('Known model: %s', k)
