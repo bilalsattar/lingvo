@@ -42,7 +42,7 @@ _WAYMO_BASE = os.environ.get('WAYMO_DIR', 'FILL-ME-IN')
 def WaymoTrainSpec(params):
   """Training set."""
   p = params.Copy()
-  p.file_datasource.file_pattern = 'train.tfr-*-of-01000'
+  p.file_pattern = 'train.tfr-*-of-01000'
   p.num_samples = 158361
   return p
 
@@ -50,7 +50,7 @@ def WaymoTrainSpec(params):
 def WaymoMiniTrainSpec(params):
   """Training shards used for decoding."""
   p = params.Copy()
-  p.file_datasource.file_pattern = 'train.tfr-000[0-2]?-of-01000'
+  p.file_pattern = 'train.tfr-000[0-2]?-of-01000'
   p.num_samples = 4773
   return p
 
@@ -67,7 +67,7 @@ def WaymoValSpec(params):
     An updated Waymo open dataset params with the validation spec.
   """
   p = params.Copy()
-  p.file_datasource.file_pattern = 'valid.tfr-*-of-01000'
+  p.file_pattern = 'valid.tfr-*-of-01000'
   p.num_samples = 40077
   return p
 
@@ -75,7 +75,7 @@ def WaymoValSpec(params):
 def WaymoMinivalSpec(params):
   """Miniature validation set (10% of full validation set)."""
   p = params.Copy()
-  p.file_datasource.file_pattern = 'valid.tfr-000??-of-01000'
+  p.file_pattern = 'valid.tfr-000??-of-01000'
   p.num_samples = 4109
   return p
 
@@ -154,7 +154,7 @@ class StarNetBase(base_model_params.SingleTaskModelParams):
     ROTATIONS = [0, np.pi / 2, 3. * np.pi / 4, np.pi / 4]
 
   def _configure_input(self, p, split):
-    p.file_datasource.file_pattern_prefix = _WAYMO_BASE
+    p.file_pattern_prefix = _WAYMO_BASE
 
     job_type = cluster_factory.Current().job
 
